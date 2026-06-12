@@ -1,8 +1,13 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  // Use Render-provided URL if set; otherwise fall back to local dev.
+  // NOTE: backend mounts routes at `/api`, so baseURL must include `/api`.
+  baseURL:
+    import.meta.env.VITE_API_URL || 'https://gemstone-backend-3.onrender.com/api',
 });
+
+
 
 // Attach JWT to every outgoing request
 API.interceptors.request.use((config) => {
